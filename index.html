@@ -1,0 +1,64 @@
+<!doctype html>
+<html>
+	<head>
+		<meta charset="utf-8" />
+		<title>Fi - Sparkling logo</title>
+    <link rel="stylesheet" href="css/style.css" type="text/css" >
+	</head>
+	<body>
+
+		<div id="container"></div>
+
+    <!-- Libraries -->
+
+    <script src="js/library/dat.gui.js"></script>
+    <script src="js/library/Modernizr.js"></script>
+
+    <script src="js/library/Three.js"></script>
+    <script src="js/library/Detector.js"></script>
+    <script src="js/library/Stats.js"></script>
+
+
+    <script src="js/library/Tween.js"></script>
+    <script src="js/library/Sparks.js"></script>
+
+    <script src="js/library/ShaderExtras.js"></script>
+    <script src="js/library/postprocessing/EffectComposer.js"></script>
+    <script src="js/library/postprocessing/RenderPass.js"></script>
+    <script src="js/library/postprocessing/ShaderPass.js"></script>
+    <script src="js/library/postprocessing/MaskPass.js"></script>
+
+     <script type="x-shader/x-vertex" id="vertexshader">
+      attribute float size;
+      attribute vec4 ca;
+      varying vec4 vColor;
+
+      void main() {
+        vColor = ca;
+        vec4 mvPosition = modelViewMatrix * vec4( position, 1.0 );
+        gl_PointSize = size * ( 150.0 / length( mvPosition.xyz ) );
+        gl_Position = projectionMatrix * mvPosition;
+      }
+
+    </script>
+
+    <script type="x-shader/x-fragment" id="fragmentshader">
+      uniform vec3 color;
+      uniform sampler2D texture;
+      varying vec4 vColor;
+      uniform float radius;
+      uniform vec2 delta;
+      varying vec2 texCoord;
+      void main() {
+        vec4 outColor = texture2D( texture, gl_PointCoord );
+        if ( outColor.a < 0.5 ) discard;
+        gl_FragColor = outColor * vec4( color * vColor.xyz, 1.0 );
+      }
+
+    </script>
+
+    <!-- Showtime! -->
+    <script src="js/main.js"></script>
+
+	</body>
+</html>

@@ -1,4 +1,4 @@
-fi-labs_webgl-sparkling-logo
-============================
+fi-labs_sparkling-logo
+===================
 
-Fi Labs WebGL Sparkling Logo 
+Fi Labs Sparkling Logo
