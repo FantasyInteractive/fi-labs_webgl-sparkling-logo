@@ -87,9 +87,10 @@ FI.ParticleLogo = new function() {
         preserveDrawingBuffer : true  // to allow screenshot
       });
       renderer.setClearColorHex( 0x000000, 1 );
-    }else{
-       Detector.addGetWebGLMessage();
-       return true;
+    } else {
+      var errormsg = Detector.getWebGLErrorMessage();
+      container.appendChild(errormsg);
+      return true;
     }
 
     renderer.setSize( window.innerWidth, window.innerHeight );
